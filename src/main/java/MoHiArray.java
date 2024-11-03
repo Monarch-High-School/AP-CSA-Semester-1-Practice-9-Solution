@@ -1,9 +1,10 @@
 /**
  * Implements a MoHiArray class which uses an array of integers as its base.
  * The class provides a series of methods that perform operations on the array.
- * @author
+ * **SOLUTION FILE**
+ * @author J. Cihlar
  * @version 1.0
- * @since 2024-10-xx
+ * @since 2024-10-15
  */
 
 
@@ -20,15 +21,18 @@ class MoHiArray {
         array = a;
     }
 
-        // TODO: complete the methods below per the Java doc
-
     /**
      * Find the largest value in the array
      * @return int he largest value in the array. If the array is of size 0, returns Integer.MIN_VALUE
      */
     public int max() {
         int m = Integer.MIN_VALUE;  // set the min value as a starting place
+        if (array.length == 0) return m;
 
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] > m)
+                m = array[i];
+        }
         return m;
     }
 
@@ -38,7 +42,12 @@ class MoHiArray {
      */
     public int min() {
         int m = Integer.MAX_VALUE;  // set the max value as a starting place
+        if (array.length == 0) return m;
 
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] < m)
+                m = array[i];
+        }
         return m;
     }
 
@@ -47,8 +56,15 @@ class MoHiArray {
      * @return double the average of the values in tha array. If the array is of size 0, returns 0.
      */
     public double mean() {
+        
         double avg = 0;  // sets 0 as the starting place
+        if (array.length == 0) return 0;
+        double total = 0;
 
+        for (int i = 0; i < array.length; i++) {
+            total += array[i];
+        }
+        avg = total/array.length;
         return avg;
     }
 
@@ -57,7 +73,9 @@ class MoHiArray {
      * @param c The value by which to multiply all values in the array
      */
     public void scale(int c) {
-
+        for (int i = 0; i < array.length; i++) {
+            array[i] *= c;
+        }
     }
 
     /**
@@ -65,8 +83,12 @@ class MoHiArray {
      * @return boolean whether the values in the array are in ascending order
      */
     public boolean inOrderAsc() {
-        
-        return false;
+        if (array.length == 0 || array.length == 1) return true;
+        for (int i = 1; i < array.length-1; i++) {
+            if (array[i] > array[i+1])
+                return false;
+        }
+        return true;
     }
 
     /**
@@ -74,8 +96,12 @@ class MoHiArray {
      * @return boolean whether the values in the array are in descending order
      */
     public boolean inOrderDesc() {
-        
-        return false;
+        if (array.length == 0 || array.length == 1) return true;
+        for (int i = 1; i < array.length-1; i++) {
+            if (array[i] < array[i+1])
+                return false;
+        }
+        return true;
     }
 
     /**
@@ -84,7 +110,10 @@ class MoHiArray {
      * @param trimValue The value to replace those values with
      */
     public void trimAbove(int threshold, int trimValue) {
-        
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] > threshold)
+                array[i] = trimValue;
+        }
     }
 
     /**
@@ -94,7 +123,13 @@ class MoHiArray {
      * @param max The max value of the range
      */
     public void clamp(int min, int max) {
-        
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] < min)
+                array[i] = min;
+
+            if (array[i] > max)
+                array[i] = max;
+        }
     }
 
 
